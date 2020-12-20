@@ -2,6 +2,7 @@ package com.example.mylibrary;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -23,10 +24,16 @@ public class AllBooksActivity extends AppCompatActivity {
         booksRecView= findViewById(R.id.booksRecView);
 
         booksRecView.setAdapter(adapter);
-        booksRecView.setLayoutManager(new GridLayoutManager(this, 2));
+        booksRecView.setLayoutManager(new LinearLayoutManager(this));
+
         ArrayList<Book> books = new ArrayList<>();
-        books.add(new Book(1, "Yoda", "George Lucas", 541, "https://cdn.al.to/i/setup/images/prod/big/product-new-big,,2020/5/pr_2020_5_12_10_11_10_295_00.jpg",
-                "Short description", "Long description"));
+
+        books.add(new Book(1, "Angels & Demons", "Dan Brown", 616, "https://upload.wikimedia.org/wikipedia/en/thumb/6/6b/DaVinciCode.jpg/220px-DaVinciCode.jpg",
+                "Mystery thriller novel", "Long description"));
+
+        books.add(new Book(2, "The Da Vinci Code", "Dan Brown", 489, "https://www.taniaksiazka.pl/images/popups/D37/9788375088489.jpg",
+                "Mystery thriller novel", "Long description"));
+
 
         adapter.setBooks(books);
     }
