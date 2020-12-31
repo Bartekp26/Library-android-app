@@ -1,6 +1,7 @@
 package com.example.mylibrary;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.transition.TransitionManager;
 import android.util.Log;
@@ -46,8 +47,8 @@ public class BookRecViewAdapter extends RecyclerView.Adapter<BookRecViewAdapter.
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Change toast message into activity
-                Toast.makeText(mContext, books.get(position).getTitle() + " selected", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, BookActivity.class);
+                mContext.startActivity(intent);
             }
         });
 
