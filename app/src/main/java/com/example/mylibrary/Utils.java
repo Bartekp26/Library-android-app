@@ -72,4 +72,13 @@ public class Utils {
     public static ArrayList<Book> getFavouriteBooks() {
         return favouriteBooks;
     }
+
+    public Book getBookById(int id){
+        for(Book b: allBooks){
+            if(b.getId() == id){
+                return b;
+            }
+        }
+        return null;
+    }
 }
