@@ -39,6 +39,7 @@ public class BookActivity extends AppCompatActivity {
                     setData(incomingBook);
 
                     handleAlreadyRead(incomingBook);
+                    handleWantToRead(incomingBook);
                 }
             }
         }
@@ -67,7 +68,7 @@ public class BookActivity extends AppCompatActivity {
         Glide.with(this).asBitmap().load(book.getImageUrl()).into(bookImage);
     }
 
-    private void handleAlreadyRead(Book book){
+    private void handleAlreadyRead(final Book book){
         ArrayList<Book> alreadyReadBooks = Utils.getInstance().getAlreadyReadBooks();
 
         boolean existInAlreadyReadBooks = false;
@@ -88,6 +89,36 @@ public class BookActivity extends AppCompatActivity {
                         Toast.makeText(BookActivity.this, "Book added", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(BookActivity.this, AlreadyReadBookActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(BookActivity.this, "Something wrong happened, try again", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+
+    private void handleWantToRead(final Book book){
+        ArrayList<Book> wantToReadBooks = Utils.getInstance().getWantToReadBooks();
+
+        boolean existInWantToReadBooks = false;
+
+        for (Book b: wantToReadBooks){
+            if(b.getId() == book.getId()){
+                existInWantToReadBooks = true;
+            }
+        }
+
+        if (existInWantToReadBooks){
+            btnAddToWantToRead.setEnabled(false);
+        } else {
+            btnAddToWantToRead.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Utils.getInstance().addToWantToRead(book)){
+                        Toast.makeText(BookActivity.this, "Book added", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(BookActivity.this, WantToReadBookActivity.class);
                         startActivity(intent);
                     } else {
                         Toast.makeText(BookActivity.this, "Something wrong happened, try again", Toast.LENGTH_SHORT).show();

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnAllBooks, btnAlreadyRead, btnWishlist, btnCurrentlyReading, btnFavourite, btnAbout;
+    private Button btnAllBooks, btnAlreadyRead, btnWantToRead, btnCurrentlyReading, btnFavourite, btnAbout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +35,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnWantToRead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WantToReadBookActivity.class);
+                startActivity(intent);
+            }
+        });
+
         Utils.getInstance();
     }
 
     private void initViews(){
         btnAllBooks = findViewById(R.id.btnAllBooks);
         btnAlreadyRead = findViewById(R.id.btnAlreadyRead);
-        btnWishlist = findViewById(R.id.btnWishlist);
+        btnWantToRead = findViewById(R.id.btnWishlist);
         btnCurrentlyReading = findViewById(R.id.btnCurrentlyReading);
         btnFavourite = findViewById(R.id.btnFavourite);
         btnAbout = findViewById(R.id.btnAbout);
