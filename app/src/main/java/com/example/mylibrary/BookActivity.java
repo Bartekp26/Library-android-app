@@ -69,7 +69,7 @@ public class BookActivity extends AppCompatActivity {
     }
 
     private void handleAlreadyRead(final Book book){
-        ArrayList<Book> alreadyReadBooks = Utils.getInstance().getAlreadyReadBooks();
+        ArrayList<Book> alreadyReadBooks = Utils.getAlreadyReadBooks();
 
         boolean existInAlreadyReadBooks = false;
 
@@ -99,7 +99,7 @@ public class BookActivity extends AppCompatActivity {
     }
 
     private void handleWantToRead(final Book book){
-        ArrayList<Book> wantToReadBooks = Utils.getInstance().getWantToReadBooks();
+        ArrayList<Book> wantToReadBooks = Utils.getWantToReadBooks();
 
         boolean existInWantToReadBooks = false;
 
