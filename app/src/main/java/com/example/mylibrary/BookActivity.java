@@ -40,6 +40,7 @@ public class BookActivity extends AppCompatActivity {
 
                     handleAlreadyRead(incomingBook);
                     handleWantToRead(incomingBook);
+                    handleCurrentlyReading(incomingBook);
                 }
             }
         }
@@ -52,10 +53,10 @@ public class BookActivity extends AppCompatActivity {
         txtPages = findViewById(R.id.txtPages);
         txtDescription = findViewById(R.id.txtDescription);
 
-        btnAddToCurrentlyReading = findViewById(R.id.btnCurrentlyReading);
+        btnAddToCurrentlyReading = findViewById(R.id.btnAddToCurrentlyReading);
         btnAddToWantToRead = findViewById(R.id.btnAddToWantToRead);
         btnAddToAlreadyRead = findViewById(R.id.btnAddToAlreadyRead);
-        btnAddToFavourite = findViewById(R.id.btnFavourite);
+        btnAddToFavourite = findViewById(R.id.btnAddToFavourites);
 
         bookImage = findViewById(R.id.bookImage);
     }
@@ -119,6 +120,36 @@ public class BookActivity extends AppCompatActivity {
                         Toast.makeText(BookActivity.this, "Book added", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(BookActivity.this, WantToReadBookActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(BookActivity.this, "Something wrong happened, try again", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+
+    private void handleCurrentlyReading(final Book book){
+        ArrayList<Book> currentlyReadingBooks = Utils.getCurrentlyReadingBooks();
+
+        boolean existInCurrentlyReadingBooks = false;
+
+        for (Book b: currentlyReadingBooks){
+            if(b.getId() == book.getId()){
+                existInCurrentlyReadingBooks = true;
+            }
+        }
+
+        if (existInCurrentlyReadingBooks){
+            btnAddToCurrentlyReading.setEnabled(false);
+        } else {
+            btnAddToCurrentlyReading.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Utils.getInstance().addToCurrentlyReading(book)){
+                        Toast.makeText(BookActivity.this, "Book added", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(BookActivity.this, CurrentlyReadingBookActivity.class);
                         startActivity(intent);
                     } else {
                         Toast.makeText(BookActivity.this, "Something wrong happened, try again", Toast.LENGTH_SHORT).show();
