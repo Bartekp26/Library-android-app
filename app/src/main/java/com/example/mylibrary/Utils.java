@@ -121,4 +121,6 @@ public class Utils {
     public boolean addToWantToRead(Book book){ return wantToReadBooks.add(book); }
 
     public boolean addToCurrentlyReading(Book book){ return currentlyReadingBooks.add(book); }
+
+    public boolean addToFavourite(Book book){ return favouriteBooks.add(book); }
 }
