@@ -38,9 +38,9 @@ public class BookActivity extends AppCompatActivity {
                 if(null != incomingBook){
                     setData(incomingBook);
 
+                    handleCurrentlyReading(incomingBook);
                     handleAlreadyRead(incomingBook);
                     handleWantToRead(incomingBook);
-                    handleCurrentlyReading(incomingBook);
                     handleFavourite(incomingBook);
                 }
             }
@@ -68,6 +68,37 @@ public class BookActivity extends AppCompatActivity {
         txtPages.setText(String.valueOf(book.getPages()));
         txtDescription.setText(book.getLongDescription());
         Glide.with(this).asBitmap().load(book.getImageUrl()).into(bookImage);
+    }
+
+
+    private void handleCurrentlyReading(final Book book){
+        ArrayList<Book> currentlyReadingBooks = Utils.getCurrentlyReadingBooks();
+
+        boolean existInCurrentlyReadingBooks = false;
+
+        for (Book b: currentlyReadingBooks){
+            if(b.getId() == book.getId()){
+                existInCurrentlyReadingBooks = true;
+            }
+        }
+
+        if (existInCurrentlyReadingBooks){
+            btnAddToCurrentlyReading.setEnabled(false);
+        } else {
+            btnAddToCurrentlyReading.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Utils.getInstance().addToCurrentlyReading(book)){
+                        Toast.makeText(BookActivity.this, "Book added", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(BookActivity.this, CurrentlyReadingBookActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(BookActivity.this, "Something wrong happened, try again", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 
     private void handleAlreadyRead(final Book book){
@@ -121,36 +152,6 @@ public class BookActivity extends AppCompatActivity {
                         Toast.makeText(BookActivity.this, "Book added", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(BookActivity.this, WantToReadBookActivity.class);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(BookActivity.this, "Something wrong happened, try again", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }
-    }
-
-    private void handleCurrentlyReading(final Book book){
-        ArrayList<Book> currentlyReadingBooks = Utils.getCurrentlyReadingBooks();
-
-        boolean existInCurrentlyReadingBooks = false;
-
-        for (Book b: currentlyReadingBooks){
-            if(b.getId() == book.getId()){
-                existInCurrentlyReadingBooks = true;
-            }
-        }
-
-        if (existInCurrentlyReadingBooks){
-            btnAddToCurrentlyReading.setEnabled(false);
-        } else {
-            btnAddToCurrentlyReading.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (Utils.getInstance().addToCurrentlyReading(book)){
-                        Toast.makeText(BookActivity.this, "Book added", Toast.LENGTH_SHORT).show();
-
-                        Intent intent = new Intent(BookActivity.this, CurrentlyReadingBookActivity.class);
                         startActivity(intent);
                     } else {
                         Toast.makeText(BookActivity.this, "Something wrong happened, try again", Toast.LENGTH_SHORT).show();

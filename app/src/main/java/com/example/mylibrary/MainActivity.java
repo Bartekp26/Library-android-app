@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnAllBooks, btnAlreadyRead, btnWantToRead, btnCurrentlyReading, btnFavourite, btnAbout;
+    private Button btnAllBooks, btnCurrentlyReading, btnAlreadyRead, btnWantToRead, btnFavourite, btnAbout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +18,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initViews();
+
+        btnCurrentlyReading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CurrentlyReadingBookActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnAllBooks.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,14 +51,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnCurrentlyReading.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CurrentlyReadingBookActivity.class);
-                startActivity(intent);
-            }
-        });
-
         btnFavourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,15 +59,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         Utils.getInstance();
     }
 
     private void initViews(){
         btnAllBooks = findViewById(R.id.btnAllBooks);
+        btnCurrentlyReading = findViewById(R.id.btnCurrentlyReading);
         btnAlreadyRead = findViewById(R.id.btnAlreadyRead);
         btnWantToRead = findViewById(R.id.btnWishlist);
-        btnCurrentlyReading = findViewById(R.id.btnCurrentlyReading);
         btnFavourite = findViewById(R.id.btnFavourite);
         btnAbout = findViewById(R.id.btnAbout);
     }

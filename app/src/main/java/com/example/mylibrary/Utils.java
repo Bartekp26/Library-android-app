@@ -7,9 +7,9 @@ public class Utils {
     private static Utils instance;
 
     private static ArrayList<Book> allBooks;
+    private static ArrayList<Book> currentlyReadingBooks;
     private static ArrayList<Book> alreadyReadBooks;
     private static ArrayList<Book> wantToReadBooks;
-    private static ArrayList<Book> currentlyReadingBooks;
     private static ArrayList<Book> favouriteBooks;
 
     private Utils() {
@@ -18,16 +18,16 @@ public class Utils {
             initData();
         }
 
+        if(null == currentlyReadingBooks){
+            currentlyReadingBooks = new ArrayList<>();
+        }
+
         if(null == alreadyReadBooks){
             alreadyReadBooks = new ArrayList<>();
         }
 
         if(null == wantToReadBooks){
             wantToReadBooks = new ArrayList<>();
-        }
-
-        if(null == currentlyReadingBooks){
-            currentlyReadingBooks = new ArrayList<>();
         }
 
         if(null == favouriteBooks){
@@ -89,16 +89,16 @@ public class Utils {
         return allBooks;
     }
 
+    public static ArrayList<Book> getCurrentlyReadingBooks() {
+        return currentlyReadingBooks;
+    }
+
     public static ArrayList<Book> getAlreadyReadBooks() {
         return alreadyReadBooks;
     }
 
     public static ArrayList<Book> getWantToReadBooks() {
         return wantToReadBooks;
-    }
-
-    public static ArrayList<Book> getCurrentlyReadingBooks() {
-        return currentlyReadingBooks;
     }
 
     public static ArrayList<Book> getFavouriteBooks() {
@@ -114,13 +114,13 @@ public class Utils {
         return null;
     }
 
+    public boolean addToCurrentlyReading(Book book){ return currentlyReadingBooks.add(book); }
+
     public boolean addToAlreadyRead(Book book){
         return alreadyReadBooks.add(book);
     }
 
     public boolean addToWantToRead(Book book){ return wantToReadBooks.add(book); }
-
-    public boolean addToCurrentlyReading(Book book){ return currentlyReadingBooks.add(book); }
 
     public boolean addToFavourite(Book book){ return favouriteBooks.add(book); }
 }
