@@ -1,11 +1,13 @@
 package com.example.mylibrary;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.bumptech.glide.util.Util;
 
@@ -30,4 +32,5 @@ public class AllBooksActivity extends AppCompatActivity {
 
         adapter.setBooks(Utils.getInstance().getAllBooks());
     }
+
 }

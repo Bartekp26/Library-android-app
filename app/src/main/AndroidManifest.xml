@@ -12,12 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyLibrary">
         <activity android:name=".ytCourseActivity"></activity>
-        <activity android:name=".FavouriteBookActivity" />
-        <activity android:name=".CurrentlyReadingBookActivity" />
-        <activity android:name=".WantToReadBookActivity" />
-        <activity android:name=".AlreadyReadBookActivity" />
-        <activity android:name=".BookActivity" />
-        <activity android:name=".AllBooksActivity" />
+        <activity android:name=".FavouriteBookActivity" android:label="@string/activity_favourite"/>
+        <activity android:name=".CurrentlyReadingBookActivity" android:label="@string/activity_currently_reading"/>
+        <activity android:name=".WantToReadBookActivity" android:label="@string/activity_want_to_read"/>
+        <activity android:name=".AlreadyReadBookActivity" android:label="@string/activity_already_read"/>
+        <activity android:name=".BookActivity" android:label="@string/activity_book"/>
+        <activity android:name=".AllBooksActivity" android:label="@string/activity_all_books"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
