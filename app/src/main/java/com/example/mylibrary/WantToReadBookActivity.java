@@ -19,7 +19,7 @@ public class WantToReadBookActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter.setBooks(Utils.getWantToReadBooks());
+        adapter.setBooks(Utils.getInstance(this).getWantToReadBooks());
     }
 
     @Override

@@ -34,7 +34,7 @@ public class BookActivity extends AppCompatActivity {
         if(null != intent){
             int bookId = intent.getIntExtra(BOOK_ID_KEY, -1);
             if (bookId != -1){
-                Book incomingBook = Utils.getInstance().getBookById(bookId);
+                Book incomingBook = Utils.getInstance(this).getBookById(bookId);
                 if(null != incomingBook){
                     setData(incomingBook);
 
@@ -72,7 +72,7 @@ public class BookActivity extends AppCompatActivity {
 
 
     private void handleCurrentlyReading(final Book book){
-        ArrayList<Book> currentlyReadingBooks = Utils.getCurrentlyReadingBooks();
+        ArrayList<Book> currentlyReadingBooks = Utils.getInstance(this).getCurrentlyReadingBooks();
 
         boolean existInCurrentlyReadingBooks = false;
 
@@ -88,7 +88,7 @@ public class BookActivity extends AppCompatActivity {
             btnAddToCurrentlyReading.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (Utils.getInstance().addToCurrentlyReading(book)){
+                    if (Utils.getInstance(BookActivity.this).addToCurrentlyReading(book)){
                         Toast.makeText(BookActivity.this, "Book added", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(BookActivity.this, CurrentlyReadingBookActivity.class);
@@ -102,7 +102,7 @@ public class BookActivity extends AppCompatActivity {
     }
 
     private void handleAlreadyRead(final Book book){
-        ArrayList<Book> alreadyReadBooks = Utils.getAlreadyReadBooks();
+        ArrayList<Book> alreadyReadBooks = Utils.getInstance(this).getAlreadyReadBooks();
 
         boolean existInAlreadyReadBooks = false;
 
@@ -118,7 +118,7 @@ public class BookActivity extends AppCompatActivity {
             btnAddToAlreadyRead.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (Utils.getInstance().addToAlreadyRead(book)){
+                    if (Utils.getInstance(BookActivity.this).addToAlreadyRead(book)){
                         Toast.makeText(BookActivity.this, "Book added", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(BookActivity.this, AlreadyReadBookActivity.class);
@@ -132,7 +132,7 @@ public class BookActivity extends AppCompatActivity {
     }
 
     private void handleWantToRead(final Book book){
-        ArrayList<Book> wantToReadBooks = Utils.getWantToReadBooks();
+        ArrayList<Book> wantToReadBooks = Utils.getInstance(this).getWantToReadBooks();
 
         boolean existInWantToReadBooks = false;
 
@@ -148,7 +148,7 @@ public class BookActivity extends AppCompatActivity {
             btnAddToWantToRead.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (Utils.getInstance().addToWantToRead(book)){
+                    if (Utils.getInstance(BookActivity.this).addToWantToRead(book)){
                         Toast.makeText(BookActivity.this, "Book added", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(BookActivity.this, WantToReadBookActivity.class);
@@ -162,7 +162,7 @@ public class BookActivity extends AppCompatActivity {
     }
 
     private void handleFavourite(final Book book){
-        ArrayList<Book> favouriteBooks = Utils.getFavouriteBooks();
+        ArrayList<Book> favouriteBooks = Utils.getInstance(this).getFavouriteBooks();
 
         boolean existInFavouriteBooks = false;
 
@@ -178,7 +178,7 @@ public class BookActivity extends AppCompatActivity {
             btnAddToFavourite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (Utils.getInstance().addToFavourite(book)){
+                    if (Utils.getInstance(BookActivity.this).addToFavourite(book)){
                         Toast.makeText(BookActivity.this, "Book added", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(BookActivity.this, FavouriteBookActivity.class);
